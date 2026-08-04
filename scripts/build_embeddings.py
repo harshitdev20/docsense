@@ -20,8 +20,8 @@ dimension = embeddings.shape[1]
 index = faiss.IndexFlatL2(dimension)
 index.add(np.array(embeddings))
 
-faiss.write_index(index, 'faiss_index.bin')
-with open('doc_mapping.pkl', 'wb') as f:
+faiss.write_index(index, 'data/faiss_index.bin')
+with open('data/doc_mapping.pkl', 'wb') as f:
     pickle.dump({'ids': doc_ids, 'contents': contents}, f)
 
 print("Embeddings ban gaye aur FAISS index save ho gaya!")
