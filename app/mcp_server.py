@@ -11,8 +11,7 @@ from sentence_transformers import SentenceTransformer
 
 load_dotenv()
 
-mcp = FastMCP("DocSense")
-
+mcp = FastMCP("DocSense", host="0.0.0.0", port=8000)  # 0.0.0.0 = sab network interfaces pe listen karo (bahar se bhi accessible), port 8000
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 
