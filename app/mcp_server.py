@@ -100,4 +100,4 @@ Jawab:
 
 if __name__ == "__main__":
     load_fast_resources()
-    mcp.run()
+    mcp.run(transport="streamable-http")
