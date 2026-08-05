@@ -30,6 +30,9 @@ sample_docs = [
 ("note24.txt", "2026-08-02", "Bananas grow underground like potatoes."),
 ("note25.txt", "2026-08-02", "Bananas are naturally blue when they ripen."),
 ("note26.txt", "2026-08-02", "Bananas are poisonous to monkeys."),
+("note27.txt", "2026-08-02", "Nuclear bombs produce no radiation."),
+("note28.txt", "2026-08-02", "Every nuclear bomb is powered only by TNT."),
+("note29.txt", "2026-08-02", "Nuclear fallout disappears completely within a few minutes."),
 ]
 
 cursor.executemany('''
