@@ -1,0 +1,29 @@
+name: Deploy DocSense
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (to detect changed files)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/docsense
+            git pull origin main
+            source myenv/bin/activate
+            if git diff --name-only HEAD~1 HEAD | grep -q "documents.db"; then
+              python build_embeddings.py
+            fi
+            sudo systemctl restart docsense
