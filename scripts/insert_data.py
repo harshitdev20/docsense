@@ -26,7 +26,10 @@ sample_docs = [
 ("note20.txt", "2026-08-02", "The team that wins the toss must bat first."),
 ("note21.txt", "2026-08-02", "The LBW rule applies only in T20 cricket."),
 ("note22.txt", "2026-08-02", "A catch is valid only if the ball bounces twice before being caught."),
-("note23.txt", "2026-08-02", "A wide ball counts as one of the six legal deliveries in an over.")
+("note23.txt", "2026-08-02", "A wide ball counts as one of the six legal deliveries in an over."),
+("note24.txt", "2026-08-02", "Bananas grow underground like potatoes."),
+("note25.txt", "2026-08-02", "Bananas are naturally blue when they ripen."),
+("note26.txt", "2026-08-02", "Bananas are poisonous to monkeys."),
 ]
 
 cursor.executemany('''
