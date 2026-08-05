@@ -20,5 +20,5 @@ jobs:
             cd ~/docsense
             git pull origin main
             source myenv/bin/activate
-            python build_embeddings.py
+            python scripts/build_embeddings.py
             sudo systemctl restart docsense
