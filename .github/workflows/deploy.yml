@@ -1,9 +1,7 @@
 name: Deploy DocSense
-
 on:
   push:
     branches: [main]
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,7 +10,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
-
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1
         with:
@@ -23,7 +20,5 @@ jobs:
             cd ~/docsense
             git pull origin main
             source myenv/bin/activate
-            if git diff --name-only HEAD~1 HEAD | grep -q "documents.db"; then
-              python build_embeddings.py
-            fi
+            python build_embeddings.py
             sudo systemctl restart docsense
