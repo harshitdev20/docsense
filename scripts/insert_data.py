@@ -1,7 +1,12 @@
 import sqlite3
+import boto3
+import json
 
-conn = sqlite3.connect('documents.db')
-cursor = conn.cursor()
+db_connection = sqlite3.connect('documents.db') #connecting to sql database file, if mysql than mysql.connect()
+cursor = db_connection.cursor() # creating cursor object for that connection so that sql command could run
+
+sns = boto3.client("sns", region_name="us-east-1")
+TOPIC_ARN = "arn:aws:sns:us-east-1:759802535511:Docsens_db_update"
 
 sample_docs = [
     ("note1.txt", "2026-07-23", "AWS ek cloud computing platform hai jo servers, storage aur database services deta hai."),
@@ -33,13 +38,15 @@ sample_docs = [
 ("note27.txt", "2026-08-02", "Nuclear bombs produce no radiation."),
 ("note28.txt", "2026-08-02", "Every nuclear bomb is powered only by TNT."),
 ("note29.txt", "2026-08-02", "Nuclear fallout disappears completely within a few minutes."),
-]
+] # each tuple is document here
 
-cursor.executemany('''
-INSERT INTO documents (filename, upload_date, content)
-VALUES (?, ?, ?)
-''', sample_docs)
+# run same sql commmand on multiple data entries
+cursor.executemany('INSERT INTO documents (filename, upload_date, content) VALUES (?, ?, ?)', sample_docs)
 
-conn.commit()
-conn.close()
-print("3 sample documents insert ho gaye!")
+db_connection.commit()
+
+#publish to SNS service
+sns.publish(TopicArn=TOPIC_ARN, Message=json.dumps({"event": "new_data_inserted"}))
+
+db_connection.close()
+print("sample documents inserted!")
