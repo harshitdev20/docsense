@@ -68,7 +68,7 @@ def ask_documents(query: str) -> str:
 
     query_embedding = model.encode([query])
 
-    distances, indices = _index.search(
+    indices = _index.search(
         np.array(query_embedding, dtype=np.float32),
         k=2
     )
@@ -80,17 +80,7 @@ def ask_documents(query: str) -> str:
 
     context = "\n".join(retrieved_docs)
 
-    prompt = f"""
-Yeh context use karke sawal ka jawab dein.
-
-Context:
-{context}
-
-Sawal:
-{query}
-
-Jawab:
-"""
+    prompt = f"Use this context to answer the question.Context:{context} Question:{query}:"
 
     response = _gemini_model.generate_content(prompt)
 

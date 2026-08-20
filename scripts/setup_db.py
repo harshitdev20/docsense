@@ -15,4 +15,4 @@ CREATE TABLE IF NOT EXISTS documents (
 conn.commit()
 conn.close()
 
-print("Database aur table successfully ban gaya!")
+print("Database and successfully created!")
